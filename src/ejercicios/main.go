@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"sort"
+	"time"
 	"unicode/utf8"
 )
 
@@ -177,5 +179,32 @@ func main() {
 	fmt.Printf("Solución al Problema 6\n")
 	resultado := eliminarCaracteresLargos(saludo)
 	fmt.Println(resultado)
+	fmt.Printf("\n")
 
+	//Cálculo del número pi utilizando el método Montecarlo
+
+	rand.Seed(time.Now().UnixNano()) // Semilla para números aleatorios
+
+	numPuntos := 100000000 // Número de puntos a generar
+	puntosDentroCirculo := 0
+
+	for i := 0; i < numPuntos; i++ {
+		// Generar coordenadas aleatorias en el rango [0, 1)
+		x := rand.Float64()
+		y := rand.Float64()
+
+		// Calcular la distancia desde el origen (0,0)
+		distancia := x*x + y*y
+
+		// Si la distancia es menor o igual a 1, el punto está dentro del círculo
+		if distancia <= 1 {
+			puntosDentroCirculo++
+		}
+	}
+
+	// Calcular la aproximación a π
+	piAproximado := 4.0 * float64(puntosDentroCirculo) / float64(numPuntos)
+
+	fmt.Printf("Aproximación de Pi: %f\n", piAproximado)
+	fmt.Printf("\n")
 }
